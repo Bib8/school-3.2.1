@@ -62,7 +62,7 @@ public class AvatarService {
     }
 
         public Avatar findAvatar(Long id) {
-            return avatarRepository.findByStudentId(id).orElseThrow();
+            return avatarRepository.findByStudentId(id).orElse(new Avatar());
         }
 
         private byte[] generateImagePreview(Path filePath) throws IOException{
@@ -71,7 +71,7 @@ public class AvatarService {
                  ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
                 BufferedImage image = ImageIO.read(bis);
                 int height = image.getHeight() / (image.getWidth() / 100);
-                BufferedImage preview = new BufferedImage(100, height, image.getHeight());
+                BufferedImage preview = new BufferedImage(100, height, image.getType());
                 Graphics2D graphics = preview.createGraphics();
                 graphics.drawImage(image, 0, 0, 100, height, null);
                 graphics.dispose();
