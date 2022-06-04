@@ -1,31 +1,30 @@
-package ru.hogwarts.school.Model;
+package ru.hogwarts.school.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
-
 @Entity
-public class Faculty {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String name;
-    private String color;
+    private int age;
 
-    @OneToMany(mappedBy = "faculty")
-    private Collection<Student> students;
+    @ManyToOne
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
 
-    public Faculty() {
+    public Student() {
 
     }
 
-    public Faculty(Long id, String name, String color) {
+    public Student(Long id, String name, int age) {
         this.id = id;
         this.name = name;
-        this.color = color;
+        this.age = age;
     }
 
     public Long getId() {
@@ -44,33 +43,33 @@ public class Faculty {
         this.name = name;
     }
 
-    public String getColor() {
-        return color;
+    public int getAge() {
+        return age;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Faculty)) return false;
-        Faculty faculty = (Faculty) o;
-        return Objects.equals(getId(), faculty.getId()) && Objects.equals(getName(), faculty.getName()) && Objects.equals(getColor(), faculty.getColor());
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return getAge() == student.getAge() && getId().equals(student.getId()) && getName().equals(student.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getColor());
+        return Objects.hash(getId(), getName(), getAge());
     }
 
     @Override
     public String toString() {
-        return "Faculty{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", color='" + color + '\'' +
+                ", age=" + age +
                 '}';
     }
 }
