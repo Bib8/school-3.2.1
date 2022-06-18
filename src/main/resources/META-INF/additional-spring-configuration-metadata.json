@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "students.avatar.dir.path",
+      "type": "java.lang.String",
+      "description": "Description for students.avatar.dir.path."
+    }
+  ] }
