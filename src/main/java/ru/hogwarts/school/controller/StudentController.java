@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.model.StudentFilters;
 import ru.hogwarts.school.service.AvatarService;
 import ru.hogwarts.school.service.StudentService;
 
@@ -19,10 +20,11 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("student")
+@RequestMapping("/student")
 public class StudentController {
     private final StudentService studentService;
     private final AvatarService avatarService;
@@ -98,4 +100,19 @@ public class StudentController {
             is.transferTo(os);
         }
     }
+
+    @GetMapping("/getStudentFilters")
+    public List<StudentFilters> getStudentQTY(){
+      return studentService.getStudentQTY();
+    }
+    @GetMapping("/getStudentAVGAge")
+    public List<StudentFilters> getStudentAVGAge(){
+      return studentService.getStudentAVGAge();
+    }
+    @GetMapping("/getLastFiveStudentId")
+    public List<StudentFilters> getLastFiveStudentId(){
+      return studentService.getLastFiveStudentId();
+    }
+
+
 }
