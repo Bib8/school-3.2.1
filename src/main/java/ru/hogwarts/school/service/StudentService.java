@@ -1,11 +1,12 @@
-package ru.hogwarts.school.Service;
+package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
-import ru.hogwarts.school.Model.Student;
-import ru.hogwarts.school.Repositories.StudentRepository;
+import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.model.StudentFilters;
+import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 
@@ -22,19 +23,30 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Optional<Student> findStudentById(long id){
-        return studentRepository.findById(id);
+    public Student findStudentById(Long id){
+        return studentRepository.findById(id).orElseThrow();
     }
 
     public Student editStudent(Student student){
         return studentRepository.save(student);
     }
 
-    public void deleteStudent(long id){
+    public void deleteStudent(Long id){
         studentRepository.deleteById(id);
     }
 
     public Collection<Student> findAllByAgeBetween(Integer minAge, Integer maxAge){
         return studentRepository.findAllByAgeBetween(minAge, maxAge);
     }
+
+    public List<StudentFilters> getStudentQTY() {
+        return studentRepository.getStudentQTY();
+    }
+    public List<StudentFilters> getStudentAVGAge() {
+        return studentRepository.getStudentAVGAge();
+    }
+    public List<StudentFilters> getLastFiveStudentId() {
+        return studentRepository.getLastFiveStudentId();
+    }
+
 }
