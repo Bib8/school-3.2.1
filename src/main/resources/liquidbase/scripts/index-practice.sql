@@ -1,7 +1,6 @@
 -- liquibase formatted sql
 
 -- changeset admin:1
-select name from student where name like '*%' group by name;
 CREATE INDEX student_name_index ON student(name);
 
 -- changeset admin:2
