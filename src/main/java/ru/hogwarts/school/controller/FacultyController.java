@@ -57,4 +57,9 @@ public class FacultyController {
     public ResponseEntity<HashMap<Long, Faculty>> filterFacultyByColor(@RequestParam String color){
         return ResponseEntity.ok(facultyService.filterColorFaculty(color));
     }
+     @GetMapping("/getMaxLengthName")
+    public ResponseEntity<String> getMaxLengthName(){
+         return facultyService.getFacultyNameWithMaxLength();
+    }
+
 }

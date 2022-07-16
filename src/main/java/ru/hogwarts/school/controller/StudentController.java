@@ -114,5 +114,18 @@ public class StudentController {
       return studentService.getLastFiveStudentId();
     }
 
+    @GetMapping("/sortByName")
+    public ResponseEntity<Collection<String>> getAllStudentsWithName() {
+        Collection<String> stringCollection = studentService.getFilteredByName();
+        if (stringCollection.size() == 0) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(stringCollection);
+    }
+
+    @GetMapping("/getAllStudentsAVGAgeSTR")
+    public  Double getAllStudentsAVGAge() {
+        return studentService.getAllStudentsAVGAgeSTR();
+    }
 
 }
